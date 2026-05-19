@@ -40,10 +40,10 @@ Do not summarise or repeat reflect output here. Log is a separate, independent c
 After log confirms, output exactly:
 
 ```
-Wrap complete. Want to run /new-chat to prepare the next session? (y/n)
+Wrap complete. Want to run /handoff to prepare the next session? (y/n)
 ```
 
-If yes: use the Skill tool to invoke the `new-chat` skill.
+If yes: use the Skill tool to invoke the `handoff` skill.
 If no: stop.
 
 ---
