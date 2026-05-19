@@ -1,70 +1,51 @@
 # AI-collab-skills
 
-Three Claude Code skills for building a compounding AI collaboration system. Each session builds on the last — your AI gets better at working with you the more you use it.
+Claude skills for improving AI collaboration and memory usage over time.
 
----
+## What this is
 
-## Skills
+AI sessions are stateless by default. Each conversation starts fresh. Patterns don't carry. You do the same calibration work every time.
 
-| Command | Name | What it does |
-|---------|------|--------------|
-| `/reflect` | Reflect | Analyses how you worked together — not what you built, but how. Surfaces patterns, writes learnings to memory. |
-| `/new-chat` | Handoff | Generates a copy-pasteable starter prompt that carries full context to a new conversation. |
-| `/log` | Log | Writes a narrative chronicle of the session — what was brought, what was built, who proposed what. |
-| `/wrap` | Wrap | Runs Reflect → Log in sequence, then asks if you want Handoff. One command at end of session. |
+This repo is a growing collection of Claude skills designed to change that — practices for building AI collaboration that compounds session over session, not just improves within one.
 
----
+## What's here
 
-## Install
+| Skill | What it does |
+|---|---|
+| `reflect` | Analyses how you worked together at session end. Surfaces patterns, failures, and collaboration signals. Writes learnings to memory. |
+| `handoff` | Generates a copy-pasteable starter prompt before closing a long session. Carries decisions, context, and file references into the next conversation. |
+| `log` | Chronicles each session as a narrative record. Builds an archive of how you work, what you've built, and how the collaboration is evolving. |
 
-Requires [Claude Code](https://claude.ai/code).
+## How to use
 
-```bash
-git clone https://github.com/vishal-tandon/AI-collab-skills.git
-cp -r AI-collab-skills/skills/* ~/.claude/skills/
-```
+These are Claude Code skills. To install:
 
-Restart Claude Code. All four commands are live.
+1. Clone this repo
+2. Copy the skill folders into `~/.claude/skills/`
+3. Invoke during sessions with `/reflect`, `/handoff`, `/log`
 
----
+Each skill has a `SKILL.md` with full instructions. Read it before running.
 
-## Use
+## How this grows
 
-```
-/reflect          — run after a task or at end of session
-/new-chat         — run when context window is full, before closing
-/log              — run to chronicle what happened this session
-/wrap             — runs all three in sequence (recommended daily habit)
-```
+New skills get added as I build and test them. The scope stays focused: practices that make AI collaboration sharper, more continuous, and more intentional.
 
----
+If you've built something that fits, open a PR. If you've improved one of these skills for your own workflow, share it. The goal is a library that evolves with how people actually work with AI.
 
-## How it compounds
+## Contributing
 
-Running these three practices across sessions builds something that no single session could:
+- Fork the repo
+- Add or improve a skill in its own folder: `skills/your-skill-name/SKILL.md`
+- Open a PR with a short description of what it does and why it works
 
-- **Reflect** surfaces patterns in how you work. Those patterns become rules encoded into your project files.
-- **Handoff** carries those rules and current state into every new session — no context lost, no momentum broken.
-- **Log** builds an archive of every interaction — interrogatable, case-study-ready.
+No gatekeeping. If it makes collaboration better, it belongs here.
 
-After 10 sessions: the AI knows your communication patterns, your decision style, what causes rework.
+## License
 
-After 50 sessions: the logs become data. Find patterns across months. Build case studies from recorded sessions. Track how your collaboration evolves.
+MIT
 
-The practices compound because they feed each other — better constraints → better outputs → better reflections → better constraints.
+## Built by
 
----
+Vishal Tandon — Exploring how AI changes the way we design, build and test product ideas.
 
-## Customise
-
-These are starting points. Edit the SKILL.md files to match how you work:
-
-- Add analysis dimensions to `/reflect` that matter for your domain
-- Adjust the handoff template in `/new-chat` to match your project structure
-- Extend the log format in `/log` to capture what you want tracked
-
-The system compounds because you keep improving it.
-
----
-
-MIT License. Fork, extend, build beyond.
+[LinkedIn](https://www.linkedin.com/in/vishaltandon/) · [Substack](https://substack.com/@vishxdesign) · [Medium](https://medium.com/@vishx.design) · [Instagram](https://www.instagram.com/vishx.design/)
