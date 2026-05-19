@@ -47,6 +47,7 @@ Scan every prompt the user sent and every response Claude gave within the scope.
 - What context, if the user had provided upfront, would have eliminated back-and-forth?
 - What did Claude do that was unnecessary — over-researching, over-scaffolding, unrequested features, verbose responses?
 - What could Claude have inferred from memory or context but didn't?
+- Did this session resume from a handoff? If so, were any docs or outputs already drafted in a previous session that Claude regenerated unnecessarily?
 
 **5. What works with you vs what doesn't**
 - Methods that worked: approaches that got fast approval or good flow
@@ -63,6 +64,15 @@ Go beyond session bugs. Ask: what does this session reveal about *how the user w
 - If a new collaborator joined and asked "how does this user like to work?", what would you tell them from this session alone?
 
 This is the most important section. Surface workflow patterns, not just one-off fixes.
+
+**7. Agent opportunities**
+Scan for tasks that were repetitive, multi-step, or well-defined enough to be delegated:
+- Was any task in this session a strong candidate for an existing agent?
+- Was an existing agent used? Did it perform well — or did Claude end up doing the work inline instead?
+- Were there repeatable task patterns that don't yet have an agent but should? (e.g. "every time we do X, Claude does Y and Z in sequence")
+- What would the agent need to know, do, and produce to handle this task reliably?
+
+If a new agent is warranted: name it, describe its job in one sentence, and list what it reads/writes. Surface as a proposed memory save.
 
 ---
 
@@ -94,6 +104,13 @@ This is the most important section. Surface workflow patterns, not just one-off 
 - What the delivery model should look like for this kind of work
 - What a new collaborator would need to know about how the user operates
 Be specific. This section should generate the most durable memory saves.]
+
+### Agent opportunities
+[Tasks from this session that could be delegated to an existing or new agent.
+- Existing agent fit: was there a task an agent should have handled but didn't?
+- New agent candidate: repeatable task pattern with a clear input/output?
+- If new: name, one-sentence job description, what it reads/writes.
+Skip if nothing warrants it — "Agent opportunities: none this session."]
 
 ### Proposed memory saves
 [For each proposed save:]
