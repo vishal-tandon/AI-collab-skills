@@ -15,16 +15,21 @@ This repo is a growing collection of Claude skills designed to change that — p
 | `reflect` | Analyses how you worked together at session end. Surfaces patterns, failures, and collaboration signals. Writes learnings to memory. |
 | `handoff` | Generates a copy-pasteable starter prompt before closing a long session. Carries decisions, context, and file references into the next conversation. |
 | `log` | Chronicles each session as a narrative record. Builds an archive of how you work, what you've built, and how the collaboration is evolving. |
+| `wrap` | Runs reflect → log in sequence, then asks if you want handoff. One command to close a session properly. |
 
 ## How to use
 
-These are Claude Code skills. To install:
+These are Claude Code skills. Works with the VS Code extension, terminal CLI, and desktop app — all share the same `~/.claude/` config folder. Not supported on claude.ai web.
+
+To install:
 
 1. Clone this repo
 2. Copy the skill folders into `~/.claude/skills/`
-3. Invoke during sessions with `/reflect`, `/handoff`, `/log`
+3. Invoke during sessions with `/reflect`, `/handoff`, `/log`, `/wrap`
 
-Each skill has a `SKILL.md` with full instructions. Read it before running.
+New to Claude Code skills? See [SETUP.md](SETUP.md) for a full walkthrough.
+
+Each skill has a `SKILL.md` with full instructions.
 
 ## How this grows
 
