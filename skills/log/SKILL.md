@@ -1,6 +1,6 @@
 ---
 name: log
-description: Chronicle the current session as a human-to-machine interaction log. Writes to the active project's data/session-log.md and a global session log. Use at end of session, or after /wrap runs it automatically.
+description: Chronicle the current session as a human-to-machine interaction log. Writes to two places: the active project's data/session-log.md (project interactions) and ~/claude-projects/session-log.md (global log across all projects and system-level changes). Use at end of session, or after /wrap runs it automatically.
 allowed-tools:
   - Read
   - Write
@@ -66,13 +66,13 @@ Append the entry to `{project-root}/data/session-log.md`.
 
 ## Step 4 — Write the global-level entry
 
-Target: `~/projects/session-log.md` (adjust to wherever you keep cross-project notes)
+Target: `~/claude-projects/session-log.md`
 
 If the file does not exist, create it with this header:
 ```markdown
 # Global Session Log
 
-Chronological record of all sessions across projects. Captures what was worked on, what projects were touched, and any system-level changes.
+Chronological record of all sessions across projects. Captures what was worked on, what projects were touched, and any system-level changes — skills built, workflows changed, process decisions made.
 
 ---
 ```
@@ -113,7 +113,7 @@ Output:
 ```
 Logged.
 - {project-root}/data/session-log.md — Session {N} appended
-- ~/projects/session-log.md — Session {N} appended
+- ~/claude-projects/session-log.md — Session {N} appended
 ```
 
 Then stop. No summary, no reflection, no additional output.

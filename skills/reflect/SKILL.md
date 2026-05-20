@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Run a reflection on work done in this session. Invoke when the user types /reflect, "reflect on this", "reflect on the last task", "what did we learn", "what went well", "let's reflect", or after a task or feature is completed. Two modes: full session (default) or last task only. Analyse the conversation autonomously. Surface what worked, what didn't, what would have been faster, and how the user can prompt more effectively. Always show proposed memory saves before writing them.
+description: Run a reflection on work done in this session. Invoke when the user types /reflect, "reflect on this", "reflect on the last task", "what did we learn", "what went well", "let's reflect", or after a task or feature is completed. Two modes: full session (default) or last task only. Analyse the conversation autonomously — no questions to the user. Surface what worked, what didn't, what would have been faster, and how the user can prompt more effectively. Always show proposed memory saves before writing them.
 ---
 
 # /reflect — Reflection
@@ -65,14 +65,39 @@ Go beyond session bugs. Ask: what does this session reveal about *how the user w
 
 This is the most important section. Surface workflow patterns, not just one-off fixes.
 
+**6b. Repeatable patterns synthesis**
+Cross-reference "what went well" and "what didn't work" to identify patterns that appear across both directions:
+- Things that worked in this session that also appear in existing memory as confirmed working methods — was the method applied correctly? Does it need reinforcement?
+- Things that failed in this session that also appear in memory as known failure modes — was a saved rule ignored, misapplied, or missing nuance?
+- For each pattern found: Is it already saved? If yes, was it applied correctly this session? If not, does it need a new save?
+- Explicitly hunt for confirmed working methods that lack a memory entry — not just corrections, but positive patterns that reliably produce good outcomes and should be locked in so future sessions don't drift.
+
+This step exists to correct the bias toward saving only failures. Equally valuable: "this approach reliably works, save it so we don't regress."
+
 **7. Agent opportunities**
 Scan for tasks that were repetitive, multi-step, or well-defined enough to be delegated:
-- Was any task in this session a strong candidate for an existing agent?
+- Was any task in this session a strong candidate for an existing agent or workflow?
 - Was an existing agent used? Did it perform well — or did Claude end up doing the work inline instead?
 - Were there repeatable task patterns that don't yet have an agent but should? (e.g. "every time we do X, Claude does Y and Z in sequence")
 - What would the agent need to know, do, and produce to handle this task reliably?
 
-If a new agent is warranted: name it, describe its job in one sentence, and list what it reads/writes. Surface as a proposed memory save.
+If a new agent is warranted: name it, describe its job in one sentence, and list what it reads/writes.
+
+**8. Source fidelity** *(content sessions only)*
+When content was derived from a source document (article, musing, brief), check that derived pieces haven't introduced framing the source doesn't support:
+- Does the most extractable/quotable line in the derived post accurately represent the source thesis?
+- Did any reframe during iteration shift the core claim?
+- Would a reader who only saw the derived post walk away with the right understanding of the source argument?
+
+Flag any drift as a specific correction, not a general note.
+
+**9. Pre-build prerequisites** *(visual/technical sessions)*
+Before any implementation task, check — did Claude confirm the necessary constraints before writing the first line?
+- Platform constraints: target dimensions, format, safe zones
+- Role of the artifact: what job does it do?
+- Format confirmation: was the format explicitly agreed before build started?
+
+Flag any build that started without these as a preventable efficiency loss.
 
 ---
 
@@ -105,6 +130,10 @@ If a new agent is warranted: name it, describe its job in one sentence, and list
 - What a new collaborator would need to know about how the user operates
 Be specific. This section should generate the most durable memory saves.]
 
+### Repeatable patterns
+[Cross-section synthesis. For each pattern:]
+- **[Pattern name]** — Seen in: [what went well / what didn't]. Already saved? [yes/no]. Action: [save / update / already covered].
+
 ### Agent opportunities
 [Tasks from this session that could be delegated to an existing or new agent.
 - Existing agent fit: was there a task an agent should have handled but didn't?
@@ -113,17 +142,17 @@ Be specific. This section should generate the most durable memory saves.]
 Skip if nothing warrants it — "Agent opportunities: none this session."]
 
 ### Proposed memory saves
-[For each proposed save:]
-**[GLOBAL / PROJECT: project-name / TASK-SPECIFIC (not saving)]**
-> File: feedback_xyz.md or project_xyz.md
-> Type: feedback / project / user
-> Content preview:
-> [Exact content that would be written — title, body, Why, How to apply]
+[For each proposed save, use the routing format below. Flag whether it comes from a failure or a confirmed working method.]
 
-Save these to memory? You can approve all, skip any, or edit before I write.
+**[→ ~/.claude/CLAUDE.md | → project/CLAUDE.md | → memory: filename.md]**
+> Section: [section name to add/update, for CLAUDE.md saves]
+> Source: [failure correction / confirmed working method]
+> Rule or content: [exact text to embed or save]
+
+Save these? You can approve all, skip any, or edit before I write.
 
 ### Skill improvement?
-[After every reflect run, check: did this session surface a new analysis dimension not currently covered by this skill's categories?
+[After every reflect run, check: did this session surface a new analysis dimension not covered by this skill's categories?
 
 Ask:
 - Was there a type of failure this session that didn't fit neatly into any existing category?
@@ -138,22 +167,51 @@ This section is how the reflect skill improves itself over time.]
 
 ---
 
-## Memory classification
+## Memory routing — where each save goes
 
-**Save as global feedback** when:
-- Pattern applies regardless of project (communication style, decision style, format preferences)
-- Would benefit Claude in any future session
+Before proposing any save, classify using this decision tree:
+
+```
+Is this a behavioral rule (how Claude should act)?
+  ├─ Yes, applies in every project → embed in ~/.claude/CLAUDE.md
+  ├─ Yes, applies only in this project → embed in project CLAUDE.md
+  └─ No, it's reference data → save as memory file
+```
+
+**The core mistake to avoid:** saving behavioral rules to memory files. Memory files get loaded on demand — rules buried there don't get applied. Rules in CLAUDE.md files auto-load every session and are always active.
+
+### Route 1: `~/.claude/CLAUDE.md` (global, always active)
+
+Use for:
+- Communication style, output format, decision patterns
+- How the user gives feedback, how they work
+- Universal workflow rules that apply across every project
+
+How to embed: open `~/.claude/CLAUDE.md`, find the relevant section, add inline. One sentence + When to apply. Read the file first to avoid duplicates.
+
+### Route 2: Project `CLAUDE.md` (auto-loaded when in that directory)
+
+Use for:
+- Domain-specific rules for this project (e.g. design system rules, copy patterns)
+- Project-specific workflow or tool rules
+
+How to embed: open the project's CLAUDE.md, add to the relevant section.
+
+### Route 3: Memory file (reference data only)
+
+Use only for: project state, historical context, long reference material, agent definitions.
+
+**Save as global memory** when:
+- Reference data that applies across projects
+- Complex reference too long to embed in CLAUDE.md inline
 
 **Save as project memory** when:
-- Specific to this project's context, constraints, or goals
-- Would only matter when working on this specific project
+- Project decisions, history, or status
 
 **Don't save** when:
-- Too task-specific to generalise
-- Already captured in an existing memory (update instead)
-- A one-off that reflects session context, not a lasting pattern
-
-Where Claude saves memory depends on your setup. If you use a memory system (e.g. auto-memory files in `~/.claude/`), write there. If not, present the proposed saves as text for manual review.
+- Already captured (update instead)
+- One-off that won't recur
+- Behavioral rule that belongs in CLAUDE.md
 
 ---
 
@@ -165,8 +223,8 @@ Sharp colleague doing an honest debrief — not a consultant, not a therapist. N
 
 ## After approval
 
-Once confirmed which saves to write:
-1. Write each approved memory file
-2. Update memory index for any new files
-3. Update existing files rather than creating duplicates
-4. Confirm: "Saved [n] memories. [list filenames]"
+Once the user confirms which saves to write:
+1. For CLAUDE.md saves: open the file, find the right section, embed inline
+2. For memory file saves: write the file, update MEMORY.md index if one exists
+3. Update existing entries rather than creating duplicates
+4. Confirm: "Saved [n] rules. [list of destinations]"
