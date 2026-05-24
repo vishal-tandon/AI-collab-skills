@@ -44,13 +44,13 @@ Write a narrative entry:
 ```markdown
 ## {YYYY-MM-DD} — Session {N} — {short title}
 
-{2-4 paragraphs in plain narrative prose.}
+{2–4 paragraphs in plain narrative prose.}
 ```
 
 **What to capture at project level:**
-- What the user came in with (musing, question, problem, half-formed idea) specific to this project
+- What Vishal came in with (musing, question, problem, half-formed idea) specific to this project
 - What was asked and how Claude responded — first attempt vs what it took to land
-- Where the user pushed back or redirected, and what that surfaced
+- Where Vishal pushed back or redirected, and what that surfaced
 - What was built, decided, or confirmed within the project
 - What was left open in this project
 
@@ -81,33 +81,33 @@ Write a narrative entry:
 ```markdown
 ## {YYYY-MM-DD} — Session {N} — {short title}
 
-{2-3 paragraphs in plain narrative prose.}
+{2–3 paragraphs in plain narrative prose.}
 ```
 
 **What to capture at global level:**
 - Which projects were touched and what happened in each (brief — detail lives in project log)
-- Any system-level changes: skills built or modified, workflows redesigned, memory changes
+- Any system-level changes: skills built or modified, workflows redesigned, CLAUDE.md updates, memory changes
 - Cross-project decisions or patterns that emerged
-- Meta-level shifts in how you and Claude are working together
+- Meta-level shifts in how Vishal and Claude are working together
 
 **What to omit:**
 - Project-specific detail already in the project log — summarise, don't repeat
 - File paths and technical specifics
 
 **Attribution rule (both logs):**
-- Name the user when they initiated, questioned, pushed back, decided, or redirected
-- Name Claude when proposing, building, recommending, or getting it wrong
-- Show the transfer of thinking — where ideas came from the user, where Claude shaped them, where the user corrected course
+- Name "Vishal" when he initiated, questioned, pushed back, decided, or redirected
+- Name "Claude" when proposing, building, recommending, or getting it wrong
+- Show the transfer of thinking — where ideas came from Vishal, where Claude shaped them, where Vishal corrected course
 
 **Tone (both logs):** Factual, neutral, clear. Not a celebration. Not a debrief. A record. Prose only — no bullet lists.
 
-**Global session number:** Count existing `## ` entries in global log to determine N.
+**Global session number:** Count existing `## ` entries in `~/claude-projects/session-log.md` to determine N.
 
 ---
 
 ## Step 5 — Append global log and confirm
 
-Append the entry to the global session log.
+Append the entry to `~/claude-projects/session-log.md`.
 
 Output:
 ```
