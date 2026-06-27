@@ -13,6 +13,7 @@ allowed-tools:
 Synthesise the current session's work, decisions, and pending tasks into a compact handoff prompt.
 The output must bring a fresh Claude session up to speed in one injection — no back-and-forth required.
 Optimise for: completeness of locked decisions, clarity of next steps, brevity everywhere else.
+Prescribe WHAT and WHY (current state, locked decisions, next action), not HOW. Assume a capable executor that will read the linked source docs and the auto-loaded CLAUDE.md files; prefer pointers to source-of-truth files over inlining their content or restating methodology.
 </objective>
 
 <execution>
@@ -20,7 +21,7 @@ Optimise for: completeness of locked decisions, clarity of next steps, brevity e
 Step 1 — Read memory index and active files
 If a memory index exists (e.g. MEMORY.md at `~/.claude/projects/*/memory/MEMORY.md`), read it.
 Read only project or reference memory files that were explicitly mentioned or worked on this session. Derive the list from the conversation — do not read all files.
-Skip any behavioral feedback files (e.g. `feedback_*.md`) — behavioral rules belong in CLAUDE.md files which auto-load in the next session. Including them in the handoff is redundant.
+Skip any behavioral feedback files (e.g. `feedback_*.md`) — behavioral rules belong in CLAUDE.md files which auto-load in the next session. Including them in the handoff is redundant. ALSO exclude any rule saved to a project CLAUDE.md THIS session — it auto-loads in-project. Before writing the prompt, list everything written to any CLAUDE.md this session and exclude all of it; restating it creates a redundant second source of truth that drifts.
 
 Step 2 — Identify session outcomes
 Scan the conversation for:
@@ -39,6 +40,9 @@ Structure:
 ```
 # Handoff Prompt — [date]
 
+## Read first (source of truth)
+[Pointer list: the session's source-of-truth files to read before acting — key state docs, specs, build logs touched this session. Note that global + project CLAUDE.md auto-load. Trust these files over the recap below; the recap is an index, not a substitute.]
+
 ## Who I am
 [2-3 sentences: role, background, current focus.]
 
@@ -55,7 +59,7 @@ Structure:
 [Numbered list. Specific enough that a fresh session can start executing immediately.]
 
 ## Key context for working with me
-[3-5 bullets covering non-obvious context from THIS session only — things not already covered by ~/.claude/CLAUDE.md or the project CLAUDE.md, which auto-load in the next session. Do not repeat global rules. Focus on: session-specific decisions, nuance that came up, constraints that shaped the approach.]
+[Apply the cut-test FIRST: include a bullet ONLY if a fresh session that reads the auto-loaded CLAUDE.md files (global + project) AND the linked Read-first docs would still miss it. Exclude anything saved to any CLAUDE.md this session and all global/project rules (they auto-load). If everything is covered there, write "None — see CLAUDE.md + the Read-first docs." Otherwise 1-3 bullets of genuinely session-only nuance not yet written down (current mindset/priority, a rule nuance that arose mid-session).]
 ```
 
 Step 5 — Output
