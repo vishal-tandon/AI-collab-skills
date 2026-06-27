@@ -152,17 +152,41 @@ Be specific. This section should generate the most durable memory saves.]
 
 Save these to memory? You can approve all, skip any, or edit before I write.
 
-### Skill opportunities?
-[Purpose: spot repeatable task or collaboration patterns this session that warrant tooling — a NEW skill, or an improvement to an EXISTING skill (any skill, not just reflect). This is about turning patterns into reusable process, not about reflect editing itself.
+### Skill opportunities — Part 1: New skills
 
-Ask:
-- Was there a multi-step task done by hand this session that recurs and could be a new skill? Name it, one-line job, what it reads/writes.
-- Did Claude use an existing skill that fell short or could be sharpened? Name the skill and the concrete edit.
-- Is there a collaboration pattern (how Vishal directs, corrects, sequences work) stable enough to encode into a skill?
+Scan for each type. If yes: name the skill, one-line job, trigger, inputs, outputs.
 
-Self-editing reflect is a *rare special case*, not a per-session output. Only propose a new reflect analysis category when the same uncovered dimension has shown up across 3+ sessions — otherwise the skill bloats toward an unread checklist. A one-off insight belongs in a CLAUDE.md rule (behavior), not a new reflect category.
+| Type | Question |
+|------|----------|
+| **Process** | Was there a repeatable sequence of steps done manually that needs enforcing? (Signal: Claude or Vishal had to remember what came next, or steps were done out of order.) |
+| **Output template** | Was there a fixed-input → fixed-output generation task done by hand? (Signal: same output shape produced multiple times, or will recur every time event X occurs.) |
+| **Quality gate** | Was there a check that needed to happen before proceeding but was skipped, forgotten, or inconsistently applied? (Signal: Vishal caught something Claude should have caught first.) |
+| **Workflow automation** | Was there a sequence of tool or platform operations always done together? (Signal: Claude ran 3+ steps manually that always fire in the same order.) |
+| **Transformation** | Was there a content or artifact conversion from one format to another that will recur? (Signal: took X, produced Y in a different format.) |
+| **Tool setup** | Was there a tool requiring configuration or invocation that will come up again? (Signal: Claude had to figure out how to use something that will recur.) |
+| **Reference/lookup** | Was there a consistent question answered from a known source that will recur? (Signal: Claude searched or read the same type of source for the same type of question.) |
+| **Agent coordination** | Was there orchestration of multiple steps or agents done manually that could be sequenced reliably? (Signal: Claude acted as orchestrator; a skill could replace it.) |
 
-If nothing qualifies: output "Skill opportunities: none this session."]
+Self-editing reflect: only propose a new analysis category when the same uncovered dimension appears across 3+ sessions.
+If nothing qualifies for a type: skip it.
+
+### Skill opportunities — Part 2: Skill convergence
+
+For every skill invoked this session, or any pattern done manually that matches an existing skill:
+
+| Skill | Turns to approval | Root cause of iterations |
+|-------|------------------|--------------------------|
+| [skill name or "manual: pattern name"] | [N turns] | [what caused each correction] |
+
+For any skill requiring more than 1 turn:
+- What assumption did the skill make that was wrong?
+- What rule, constraint, or worked example — if added to the skill definition — would have produced approved output on turn 1?
+- Propose the exact addition: quote the line to add, name the section it goes in.
+
+Skills approved in 1 turn: note them. That is the target state.
+
+Convergence signal: same skill, 3+ sessions, consistently 1 turn = skill is mature.
+Regression signal: skill that was 1 turn last session is now 3+ turns = something changed, audit it.]
 ```
 
 ---
