@@ -222,7 +222,7 @@ How to embed: open project CLAUDE.md, add to relevant section. Check section exi
 ### Route 3: Memory file (reference data only)
 Only for: project state, historical context, career data, agent definitions, reference material too long for CLAUDE.md.
 
-**Save as global memory** (`~/.claude/projects/-home-vishal/memory/`) when:
+**Save as global memory** (`~/.claude/projects/<home>/memory/`) when:
 - Reference data applying across projects
 - Complex reference with many sub-rules that would bloat CLAUDE.md
 
