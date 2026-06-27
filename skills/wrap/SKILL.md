@@ -1,6 +1,6 @@
 ---
 name: wrap
-description: End-of-session skill. Chains reflect then log in sequence. Use when wrapping up a session — captures learnings (reflect) and chronicles the interaction (log). After both complete, asks if Vishal wants to run /handoff. Trigger on /wrap, "let's wrap", "wrap up the session", "end of session".
+description: End-of-session skill. Chains reflect then log in sequence. Use when wrapping up a session — captures learnings (reflect) and chronicles the interaction (log). After both complete, asks if the user wants to run /handoff. Trigger on /wrap, "let's wrap", "wrap up the session", "end of session".
 allowed-tools:
   - Read
   - Write
@@ -19,7 +19,7 @@ Runs two skills in sequence. Do not skip either step. Do not compress or merge t
 
 Use the Skill tool to invoke the `reflect` skill in full-session mode.
 
-Follow reflect exactly: scan the conversation, output the full reflection, present proposed memory saves, wait for Vishal to approve or skip each one, then write the approved saves.
+Follow reflect exactly: scan the conversation, output the full reflection, present proposed memory saves, wait for the user to approve or skip each one, then write the approved saves.
 
 Do not proceed to Step 2 until reflect is complete and memory saves are resolved.
 
@@ -29,7 +29,7 @@ Do not proceed to Step 2 until reflect is complete and memory saves are resolved
 
 Use the Skill tool to invoke the `log` skill.
 
-Follow log exactly: detect the active project, write the narrative session entry in the Vishal/Claude format, append to `data/session-log.md`, confirm with "Logged. Session {N} appended."
+Follow log exactly: detect the active project, write the narrative session entry in the User/Claude format, append to `data/session-log.md`, confirm with "Logged. Session {N} appended."
 
 Do not summarise or repeat reflect output here. Log is a separate, independent chronicle.
 
@@ -43,8 +43,8 @@ After log confirms, output exactly:
 Wrap complete. Want to run /handoff to prepare the next session? (y/n)
 ```
 
-If Vishal says yes: use the Skill tool to invoke the `handoff` skill.
-If Vishal says no: stop.
+If the user says yes: use the Skill tool to invoke the `handoff` skill.
+If the user says no: stop.
 
 ---
 
