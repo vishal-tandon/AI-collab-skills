@@ -106,6 +106,14 @@ When the session created substantial new systems (multiple CLAUDE.md updates, ne
 
 Flag any session where the user had to ask for /wrap as a missed proactive trigger.
 
+**11. Rule efficacy**
+Check the session against the user's active CLAUDE.md rules, both global and project-level. Report three lists:
+- Rules that fired and worked: the rule applied, Claude followed it, it produced the right outcome.
+- Rules that were violated this session: the rule existed but Claude ignored or misapplied it. If this is the second time the same rule has been violated across sessions, propose converting it to a hook, script, or skill. Don't propose strengthening the prose again.
+- Rules that look permanently dormant: the rule never fires because the trigger doesn't occur, or it is too narrow to matter. Flag them as candidates to demote or delete in the user's next rules cleanup.
+
+This keeps the rule system pruned, not just growing. A rules file that only ever gains lines slowly buries the rules that matter.
+
 ---
 
 ## Output format
@@ -140,6 +148,11 @@ Be specific. This section should generate the most durable memory saves.]
 ### Repeatable patterns
 [Cross-section synthesis. For each pattern:]
 - **[Pattern name]** — Seen in: [what went well / what didn't]. Already in memory? [yes/no]. Action: [save / update / already covered].
+
+### Rule efficacy
+**Fired and worked:** [rules that triggered and produced the right outcome]
+**Violated this session:** [rule name, what happened. Second violation across sessions triggers a proposed hook, script, or skill instead of a prose edit.]
+**Permanently dormant:** [rules that never fire. Candidates to demote or delete in the next rules cleanup.]
 
 ### Proposed memory saves
 [For each proposed save, flag whether it comes from a failure or a confirmed working method:]
@@ -192,6 +205,8 @@ Regression signal: skill that was 1 turn last session is now 3+ turns = somethin
 ---
 
 ## Memory routing — where each save goes
+
+**Routing principle:** any correction recurring a third time produces a hook, script, or skill, not another CLAUDE.md line. A rule is a memo, a hook is a guarantee.
 
 Before proposing any save, classify using this decision tree:
 
